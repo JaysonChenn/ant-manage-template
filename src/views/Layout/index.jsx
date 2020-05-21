@@ -3,30 +3,17 @@ import './index.css';
 import { Layout } from 'antd';
 import SiderMenu from './Sider';
 import HeaderMenu from './Header';
+import { connect } from 'react-redux';
 
 const { Content } = Layout;
 
 class LayoutComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isCollaspsed: false,
-    };
-  }
-  toggleCollaped() {
-    this.setState({
-      isCollaspsed: !this.state.isCollaspsed,
-    });
-  }
   render() {
     return (
       <Layout id='layout'>
-        <SiderMenu value={this.state.isCollaspsed}></SiderMenu>
+        <SiderMenu value={this.props.isCollaspsed}></SiderMenu>
         <Layout className='site-layout'>
-          <HeaderMenu
-            value={this.state.isCollaspsed}
-            onClick={() => this.toggleCollaped()}
-          ></HeaderMenu>
+          <HeaderMenu />
           <Content
             className='site-layout-background'
             style={{
@@ -42,4 +29,6 @@ class LayoutComponent extends React.Component {
   }
 }
 
-export default LayoutComponent;
+export default connect(state => ({
+  isCollaspsed: state.collaspsedReducer
+}))(LayoutComponent);

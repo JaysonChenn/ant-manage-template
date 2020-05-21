@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { connect } from 'react-redux'
 
 const { Header } = Layout;
 
@@ -9,10 +10,10 @@ class HeaderMenu extends React.Component {
     return (
       <Header className='site-layout-background' style={{ padding: 0 }}>
         {React.createElement(
-          this.props.value ? MenuUnfoldOutlined : MenuFoldOutlined,
+          this.props.isCollaspsed ? MenuUnfoldOutlined : MenuFoldOutlined,
           {
             className: 'trigger',
-            onClick: () => this.props.onClick(),
+            onClick: () => this.props.dispatch({type: 'collasped'}),
           }
         )}
       </Header>
@@ -20,4 +21,6 @@ class HeaderMenu extends React.Component {
   }
 }
 
-export default HeaderMenu;
+export default connect(state => ({
+  isCollaspsed: state.collaspsedReducer
+}))(HeaderMenu);
