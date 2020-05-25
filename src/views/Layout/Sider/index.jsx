@@ -1,32 +1,48 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import {
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
-  } from '@ant-design/icons';
+  UserOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
 
 const { Sider } = Layout;
+const siderbarMenu = [
+  {
+    key: '1',
+    name: 'nav 1',
+    icon: <UserOutlined />,
+  },
+  {
+    key: '2',
+    name: 'nav 2',
+    icon: <VideoCameraOutlined />,
+  },
+  {
+    key: '3',
+    name: 'nav 3',
+    icon: <UploadOutlined />,
+  },
+];
 
-class SiderMenu extends React.Component {
-  render() {
-    return (
-      <Sider trigger={null} collapsible collapsed={this.props.value}>
-        <div className='logo' />
-        <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
-          <Menu.Item key='1' icon={<UserOutlined />}>
-            nav 1
-          </Menu.Item>
-          <Menu.Item key='2' icon={<VideoCameraOutlined />}>
-            nav 2
-          </Menu.Item>
-          <Menu.Item key='3' icon={<UploadOutlined />}>
-            nav 3
-          </Menu.Item>
-        </Menu>
-      </Sider>
-    );
-  }
-}
+/**
+ * @desctiption react hooks
+ */
+const SiderMenu = ({value}) => {
+  return (
+    <Sider trigger={null} collapsible collapsed={value}>
+      <div className='logo' />
+      <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
+        {siderbarMenu.map((item) => {
+          return (
+            <Menu.Item key={item.key} icon={item.icon}>
+              {item.name}
+            </Menu.Item>
+          );
+        })}
+      </Menu>
+    </Sider>
+  );
+};
 
 export default SiderMenu;

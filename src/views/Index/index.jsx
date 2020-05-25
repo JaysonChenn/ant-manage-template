@@ -1,9 +1,10 @@
 import React from 'react';
 
-class Index extends React.Component {
-  render() {
-    return <div>This is index component</div>;
-  }
-}
+/**
+ * @desctiption react hooks
+ */
+const Index = () => {
+  return <div>This is index component</div>;
+};
 
 export default Index;

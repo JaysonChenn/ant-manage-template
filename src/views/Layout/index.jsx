@@ -1,34 +1,43 @@
 import React from 'react';
-import './index.css';
+
+import { connect } from 'react-redux';
 import { Layout } from 'antd';
+
 import SiderMenu from './Sider';
 import HeaderMenu from './Header';
-import { connect } from 'react-redux';
+
+import './index.css';
 
 const { Content } = Layout;
 
-class LayoutComponent extends React.Component {
-  render() {
-    return (
-      <Layout id='layout'>
-        <SiderMenu value={this.props.isCollaspsed}></SiderMenu>
-        <Layout className='site-layout'>
-          <HeaderMenu />
-          <Content
-            className='site-layout-background'
-            style={{
-              margin: '6px',
-              minHeight: 280,
-            }}
-          >
-            {this.props.children}
-          </Content>
-        </Layout>
+/**
+ * @desctiption react hooks
+ */
+const LayoutComponent = ({ isCollaspsed, children }) => {
+  return (
+    <Layout id='layout'>
+      <SiderMenu value={isCollaspsed} />
+      <Layout className='site-layout'>
+        <HeaderMenu />
+        <Content
+          className='site-layout-background'
+          style={{
+            margin: '6px',
+            minHeight: 280,
+          }}
+        >
+          {children}
+        </Content>
       </Layout>
-    );
-  }
-}
+    </Layout>
+  );
+};
 
-export default connect(state => ({
-  isCollaspsed: state.collaspsedReducer
-}))(LayoutComponent);
+/**
+ * @desctiption mapStateToProps
+ */
+const mapStateToProps = (state) => ({
+  isCollaspsed: state.collaspsedReducer,
+});
+
+export default connect(mapStateToProps)(LayoutComponent);
